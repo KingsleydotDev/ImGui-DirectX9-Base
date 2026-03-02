@@ -1,0 +1,99 @@
+#pragma once
+#include "gui.hpp"
+#include <stdexcept>
+#include <intrin.h>
+
+#include "..//ext/minhook/minhook.h"
+
+#include "../ext/imgui/imgui.h"
+#include "../ext/imgui/imgui_impl_win32.h"
+#include "../ext/imgui/imgui_impl_dx9.h"
+
+#include "engine_hooks.hpp"
+
+namespace hooks
+{
+	inline void Setup();
+	inline void Destroy() noexcept;
+
+	// Helper to get Virtual Function address
+	constexpr void* VirtualFunction(void* thisptr, size_t index) noexcept
+	{
+		return (*static_cast<void***>(thisptr))[index];
+	}
+
+	// EndScene
+	using EndSceneFn = long(__stdcall*)(IDirect3DDevice9*) noexcept;
+	inline EndSceneFn EndSceneOriginal = nullptr;
+	inline long __stdcall EndScene(IDirect3DDevice9* device) noexcept;
+
+	// Reset
+	using ResetFn = HRESULT(__stdcall*)(IDirect3DDevice9*, D3DPRESENT_PARAMETERS*) noexcept;
+	inline ResetFn ResetOriginal = nullptr;
+	inline HRESULT __stdcall Reset(IDirect3DDevice9* device, D3DPRESENT_PARAMETERS* params) noexcept;
+}
+
+inline void hooks::Setup()
+{
+	if (MH_Initialize())
+		throw std::runtime_error("Unable to initialize minhook");
+
+	if (MH_CreateHook(
+		VirtualFunction(gui::device, 42),
+		&EndScene,
+		reinterpret_cast<void**>(&EndSceneOriginal)
+	)) throw std::runtime_error("Unable to hook EndScene()");
+
+	if (MH_CreateHook(
+		VirtualFunction(gui::device, 16),
+		&Reset,
+		reinterpret_cast<void**>(&ResetOriginal)
+	)) throw std::runtime_error("Unable to hook Reset()");
+
+	if (MH_EnableHook(MH_ALL_HOOKS))
+		throw std::runtime_error("Unable to enable hooks");
+
+	gui::DestroyDirectX();
+}
+
+inline void hooks::Destroy() noexcept
+{
+	MH_DisableHook(MH_ALL_HOOKS);
+	MH_RemoveHook(MH_ALL_HOOKS);
+	MH_Uninitialize();
+}
+
+inline long __stdcall hooks::EndScene(IDirect3DDevice9* device) noexcept
+{
+	static const auto returnAddress = _ReturnAddress();
+
+	const auto result = EndSceneOriginal(device);
+
+	if (_ReturnAddress() == returnAddress) {
+		return result;
+	}
+
+	if (!gui::setup)
+		gui::SetupMenu(device);
+
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	if (gui::open)
+		gui::Render();
+
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+	return result;
+}
+
+inline HRESULT __stdcall hooks::Reset(IDirect3DDevice9* device, D3DPRESENT_PARAMETERS* params) noexcept
+{
+	ImGui_ImplDX9_InvalidateDeviceObjects();
+	const auto result = ResetOriginal(device, params);
+	ImGui_ImplDX9_CreateDeviceObjects();
+	return result;
+}
