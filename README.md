@@ -1,37 +1,38 @@
 # DX9 ImGui Base
 
-Minimalist C++ DLL base using **ImGui v1.92.5 (WIP)** and **MinHook**.
+C++ DLL template for DirectX 9 overlays using **ImGui** and **MinHook**.
 
-### Setup
-* **Menu Toggle:** `INSERT` (Change in `gui.hpp` ~350)
-* **Panic/Unload:** `END` (Change in `dllmain.cpp` ~28)
-* **Core Logic:** Located in `/src/`
+## Controls
 
-### Why .hpp?
-I use headers mainly for ease and readability:
-* **No Redundancy:** Stop wasting time copying function signatures between `.cpp` and `.h` files.
-* **Instant Logic:** All menu code is right there in the header for quick tweaks without jumping files.
-* **Zero Linking Hassle:** Everything is in one place so no weird linker errors during compilation.
+| Key | Action |
+|-----|--------|
+| `INSERT` | Toggle menu |
+| `END` | Unload DLL |
 
-### Project Requirements
-If you are setting this up manually or don't have the property pages, ensure these are set:
+Menu tabs: **Player**, **Visuals**, **Misc** (theme, accent, save/load config).
 
-* **Configuration Type:** Dynamic Library (.dll)
-* **Windows SDK:** 10.0 (Latest)
-* **Platform Toolset:** v143 (Recommended)
-* **C++ Language Standard:** ISO C++20 Standard (`/std:c++20`)
-* **Character Set:** Use Multi-Byte Character Set
-* **Optimization:** Use Link Time Code Generation
+## Build
 
-### Notable Directory Configs
+1. Install the [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812) and set `DXSDK_DIR`.
+2. Open `DirectX9 ImGui Base.sln` in Visual Studio (Release \| Win32).
+3. Build — output goes to `Build/`.
 
-* **Include Directories:** Must include `$(DXSDK_DIR)Include;`
-* **Library Directories:** Must include `$(DXSDK_DIR)Lib\x86;`
+**Requirements:** DLL, Windows SDK 10, toolset v143, C++20, Multi-Byte, x86.
 
-### Usage
-1. Open in Visual Studio.
-2. Build as DLL.
-3. Inject into target process.
+## Layout
 
-Example on DX9 game.
-![SCEENSHOTS](https://i.ibb.co/MkTffm4M/Black-Ops-MP-z-Sar-LH8eax.png)
+```
+src/
+  dllmain.cpp
+  gui/             — menu, DX9 hook
+  gui/pages/       — player, visuals, misc
+  game/            — hooks, offsets, structs
+  project/         — your code: config (INI), helpers, features
+ext/               — imgui, minhook, mINI
+```
+
+Put config and your own logic in `src/project/`. Saves to `Corrupted.ini` next to the game exe.
+
+Inject the compiled .dll into a DirectX9 process.
+
+![Screenshot](https://i.ibb.co/1YjmL9gj/iw3mp-Iw-KVZJb-NN0.jpg)
