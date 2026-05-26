@@ -104,15 +104,11 @@
     <ClInclude Include="src\game\structs.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\pages\config\config_page.hpp">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="src\project\config.hpp">
       <Filter>Header Files\project</Filter>
     </ClInclude>
     <ClInclude Include="src\project\functions.hpp">
       <Filter>Header Files\project</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ext\imgui\imgui.cpp">
@@ -167,9 +163,6 @@
       <Filter>Source Files\gui\pages</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\pages\misc\misc.cpp">
-      <Filter>Source Files\gui\pages</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\pages\config\config_page.cpp">
       <Filter>Source Files\gui\pages</Filter>
     </ClCompile>
     <ClCompile Include="src\game\hooks.cpp">

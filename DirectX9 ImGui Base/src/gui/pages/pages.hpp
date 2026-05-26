@@ -7,5 +7,4 @@ namespace gui::pages
 	void RenderPlayer() noexcept;
 	void RenderVisuals() noexcept;
 	void RenderMisc() noexcept;
-	void RenderConfig() noexcept;
 }

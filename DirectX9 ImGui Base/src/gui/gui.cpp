@@ -89,11 +89,6 @@ namespace gui
 					pages::RenderMisc();
 					ImGui::EndTabItem();
 				}
-				if (ImGui::BeginTabItem("Config"))
-				{
-					pages::RenderConfig();
-					ImGui::EndTabItem();
-				}
 
 				ImGui::EndTabBar();
 			}

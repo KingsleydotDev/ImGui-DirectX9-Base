@@ -10,7 +10,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{70bcbb26-6ee6-4d04-9564-d0838cf33a20}</ProjectGuid>
-    <RootNamespace>KingsleyDX9ImGUITemplate2024</RootNamespace>
+    <RootNamespace>KingsleydotDevImGuiDirectX9ImGui.dll</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,7 +72,6 @@
     <ClInclude Include="src\gui\pages\pages.hpp" />
     <ClInclude Include="src\gui\pages\player\player.hpp" />
     <ClInclude Include="src\gui\pages\visuals\visuals.hpp" />
-    <ClInclude Include="src\gui\pages\config\config.hpp" />
     <ClInclude Include="src\project\config.hpp" />
     <ClInclude Include="src\project\functions.hpp" />
   </ItemGroup>
@@ -95,7 +94,6 @@
     <ClCompile Include="src\gui\pages\misc\misc.cpp" />
     <ClCompile Include="src\gui\pages\player\player.cpp" />
     <ClCompile Include="src\gui\pages\visuals\visuals.cpp" />
-    <ClCompile Include="src\gui\pages\config\config.cpp" />
     <ClCompile Include="src\game\hooks.cpp" />
     <ClCompile Include="src\game\offsets.cpp" />
     <ClCompile Include="src\game\structs.cpp" />
