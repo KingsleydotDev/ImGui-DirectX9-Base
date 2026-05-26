@@ -38,7 +38,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(DXSDK_DIR)Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories);$(DXSDK_DIR)Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -49,7 +49,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ext\imgui\*.h" />
+    <ClInclude Include="ext\imgui\imconfig.h" />
+    <ClInclude Include="ext\imgui\imgui.h" />
+    <ClInclude Include="ext\imgui\imgui_impl_dx9.h" />
+    <ClInclude Include="ext\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="ext\imgui\imgui_internal.h" />
     <ClInclude Include="ext\minhook\buffer.h" />
     <ClInclude Include="ext\minhook\hde\hde32.h" />
     <ClInclude Include="ext\minhook\hde\hde64.h" />
@@ -58,7 +62,19 @@
     <ClInclude Include="ext\minhook\hde\table64.h" />
     <ClInclude Include="ext\minhook\minhook.h" />
     <ClInclude Include="ext\minhook\trampoline.h" />
-    <ClInclude Include="src\*.hpp" />
+    <ClInclude Include="ext\mINI\ini.h" />
+    <ClInclude Include="src\game\hooks.hpp" />
+    <ClInclude Include="src\game\offsets.hpp" />
+    <ClInclude Include="src\game\structs.hpp" />
+    <ClInclude Include="src\gui\bootstrapper.hpp" />
+    <ClInclude Include="src\gui\gui.hpp" />
+    <ClInclude Include="src\gui\pages\misc\misc.hpp" />
+    <ClInclude Include="src\gui\pages\pages.hpp" />
+    <ClInclude Include="src\gui\pages\player\player.hpp" />
+    <ClInclude Include="src\gui\pages\visuals\visuals.hpp" />
+    <ClInclude Include="src\gui\pages\config\config.hpp" />
+    <ClInclude Include="src\project\config.hpp" />
+    <ClInclude Include="src\project\functions.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ext\imgui\imgui.cpp" />
@@ -73,11 +89,18 @@
     <ClCompile Include="ext\minhook\hde\hde64.c" />
     <ClCompile Include="ext\minhook\hook.c" />
     <ClCompile Include="ext\minhook\trampoline.c" />
-    <ClCompile Include="src\engine_hooks.hpp" />
-    <ClCompile Include="src\gui.hpp" />
     <ClCompile Include="src\dllmain.cpp" />
-    <ClCompile Include="src\hooks.hpp" />
-    <ClCompile Include="src\vars.hpp" />
+    <ClCompile Include="src\gui\bootstrapper.cpp" />
+    <ClCompile Include="src\gui\gui.cpp" />
+    <ClCompile Include="src\gui\pages\misc\misc.cpp" />
+    <ClCompile Include="src\gui\pages\player\player.cpp" />
+    <ClCompile Include="src\gui\pages\visuals\visuals.cpp" />
+    <ClCompile Include="src\gui\pages\config\config.cpp" />
+    <ClCompile Include="src\game\hooks.cpp" />
+    <ClCompile Include="src\game\offsets.cpp" />
+    <ClCompile Include="src\game\structs.cpp" />
+    <ClCompile Include="src\project\config.cpp" />
+    <ClCompile Include="src\project\functions.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

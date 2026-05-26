@@ -9,34 +9,45 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{a1b2c3d4-e5f6-7890-abcd-ef1234567890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\pages">
+      <UniqueIdentifier>{b2c3d4e5-f6a7-8901-bcde-f12345678901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{c3d4e5f6-a7b8-9012-cdef-123456789012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\project">
+      <UniqueIdentifier>{d4e5f6a7-b8c9-0123-def0-234567890123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{e5f6a7b8-c9d0-1234-ef01-345678901234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{f6a7b8c9-d0e1-2345-f012-456789012345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\project">
+      <UniqueIdentifier>{a7b8c9d0-e1f2-3456-0123-567890123456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ext">
+      <UniqueIdentifier>{b8c9d0e1-f2a3-4567-1234-678901234567}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ext\imgui\*.h">
+    <ClInclude Include="ext\imgui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
+    <ClInclude Include="ext\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
+    <ClInclude Include="ext\imgui\imgui_impl_dx9.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
+    <ClInclude Include="ext\imgui\imgui_impl_win32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ext\imgui\*.h">
+    <ClInclude Include="ext\imgui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ext\minhook\buffer.h">
@@ -63,23 +74,44 @@
     <ClInclude Include="ext\minhook\trampoline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ext\mINI\ini.h">
+      <Filter>Header Files\ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\gui\bootstrapper.hpp">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\gui\gui.hpp">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\gui\pages\pages.hpp">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\gui\pages\player\player.hpp">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\*.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\gui\pages\visuals\visuals.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\pages\misc\misc.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\hooks.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offsets.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\structs.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\pages\config\config_page.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\project\config.hpp">
+      <Filter>Header Files\project</Filter>
+    </ClInclude>
+    <ClInclude Include="src\project\functions.hpp">
+      <Filter>Header Files\project</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,21 +136,6 @@
     <ClCompile Include="ext\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hooks.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine_hooks.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vars.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ext\minhook\buffer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,6 +150,42 @@
     </ClCompile>
     <ClCompile Include="ext\minhook\trampoline.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\bootstrapper.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\pages\player\player.cpp">
+      <Filter>Source Files\gui\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\pages\visuals\visuals.cpp">
+      <Filter>Source Files\gui\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\pages\misc\misc.cpp">
+      <Filter>Source Files\gui\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\pages\config\config_page.cpp">
+      <Filter>Source Files\gui\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\hooks.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offsets.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\structs.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\project\config.cpp">
+      <Filter>Source Files\project</Filter>
+    </ClCompile>
+    <ClCompile Include="src\project\functions.cpp">
+      <Filter>Source Files\project</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

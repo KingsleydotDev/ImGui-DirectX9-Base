@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "msbuild release x86",
+        "type": "shell",
+        "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe",
+        "args": [
+          "${workspaceFolder}/DirectX9 ImGui Base.sln",
+          "/p:Configuration=Release",
+          "/p:Platform=x86",
+          "/m",
+          "/v:minimal"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": "$msCompile"
+      }
+    ]
+  }

@@ -2,52 +2,70 @@
 #include <Windows.h>
 #include <thread>
 #include <cstdint>
-#include <string>
-#include <random>
-#include "hooks.hpp"
+#include <cstdio>
 
-void Setup(const HMODULE instance)
+#include "gui/bootstrapper.hpp"
+#include "gui/gui.hpp"
+#include "game/hooks.hpp"
+#include "project/config.hpp"
+
+void MainThread(const HMODULE instance)
 {
-    try
-    {
-        // Optional: AllocConsole();
-        FILE* fp;
-        freopen_s(&fp, "CONOUT$", "w", stdout);
+	try
+	{
+		FILE* fp = nullptr;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
 
-        gui::Setup();
-        hooks::Setup();
-    }
-    catch (const std::exception& error)
-    {
-        MessageBeep(MB_ICONERROR);
-        MessageBoxA(0, error.what(), "Error", MB_OK | MB_ICONEXCLAMATION);
-        goto UNLOAD;
-    }
+		Setup();
+		game::Setup();
+		config::TryLoadOnStartup();
+	}
+	catch (const std::exception& error)
+	{
+		MessageBeep(MB_ICONERROR);
+		MessageBoxA(0, error.what(), "Error", MB_OK | MB_ICONEXCLAMATION);
+		goto UNLOAD;
+	}
 
-    // Main Loop
-    while (!GetAsyncKeyState(VK_END))
-    {
-        // Call the animation update here
-        gui::UpdateMenuTitle();
+	while (true)
+	{
+		if (GetAsyncKeyState(VK_END) & 1)
+		{
+			break;
+		}
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
+		gui::UpdateMenuTitle();
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	}
 
 UNLOAD:
-    hooks::Destroy();
-    gui::Destroy();
-    if (stdout) fclose(stdout); // Clean up the console file handle
+	game::Destroy();
+	Destroy();
+	if (stdout)
+	{
+		fclose(stdout);
+	}
 
-    FreeLibraryAndExitThread(instance, 0);
+	FreeLibraryAndExitThread(instance, 0);
 }
 
 BOOL WINAPI DllMain(const HMODULE instance, const std::uintptr_t reason, const void* reserved)
 {
-    if (reason == DLL_PROCESS_ATTACH)
-    {
-        DisableThreadLibraryCalls(instance);
-        const auto thread = CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Setup), instance, 0, nullptr);
-        if (thread) CloseHandle(thread);
-    }
-    return TRUE;
+	if (reason == DLL_PROCESS_ATTACH)
+	{
+		DisableThreadLibraryCalls(instance);
+		const auto thread = CreateThread(
+			nullptr,
+			0,
+			reinterpret_cast<LPTHREAD_START_ROUTINE>(MainThread),
+			instance,
+			0,
+			nullptr);
+		if (thread)
+		{
+			CloseHandle(thread);
+		}
+	}
+
+	return TRUE;
 }

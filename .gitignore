@@ -1,4 +1,6 @@
-
-/.vs
-/Build
-/DirectX9 ImGui Base/.vs
+/*
+!/DirectX9 ImGui Base/
+!README.md
+!DirectX9 ImGui Base.sln
+!.vscode
+!.gitignore
